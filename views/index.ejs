@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Book Your Appointment at Eros Cuts - Premium Barber Salon in Kathmandu</title>
+    <title> Eros Cuts</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Book your appointment at Eros Cuts for luxury grooming, haircuts, and beauty services in Kathmandu. Experience the best in Nepal.">
-    
-    <!-- Add the favicon link here -->
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
     
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:500,600,700&display=swap" rel="stylesheet">
@@ -25,8 +21,8 @@
 
     <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="/css/jquery.timepicker.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     
     <link rel="stylesheet" href="/css/flaticon.css">
     <link rel="stylesheet" href="/css/icomoon.css">
@@ -329,7 +325,125 @@
 >
     </section>
 
-    <section id="gallery" class="ftco-section ftco-no-pt ftco-no-pb">
+    <section id="booking" class="ftco-section ftco-booking bg-light">
+    	<div class="container ftco-relative">
+    		<div class="row justify-content-center pb-3">
+          <div class="col-md-10 heading-section text-center ftco-animate">
+          	<span class="subheading">Booking</span>
+            <h2 class="mb-4">Make an Appointment</h2>
+            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+          </div>
+        </div>
+        <h3 class="vr">Call Us: +977 976-1628372</h3>
+    		<div class="row justify-content-center">
+    			<div class="col-md-10 ftco-animate">
+    				<form action="/mail-sender" method="POST" class="appointment-form">
+						<div class="row">
+						  <div class="col-sm-6">
+							<div class="form-group">
+							  <input type="text" name="name" class="form-control" placeholder="Name" required>
+							</div>
+						  </div>
+						  <div class="col-sm-6">
+							<div class="form-group">
+							  <input type="email" name="email" class="form-control" placeholder="Email" required>
+							</div>
+						  </div>
+						  <div class="col-sm-6">
+							<div class="form-group">
+							  <input type="tel" name="phone" class="form-control" placeholder="Phone" required>
+							</div>
+						  </div>
+						  <div class="col-sm-6">
+							<div class="form-group">
+							  <input type="date" name="date" class="form-control" required>
+							</div>
+						  </div>
+						  <div class="col-sm-6">
+							<div class="form-group">
+							  <input type="time" name="time" class="form-control" required>
+							</div>
+						  </div>
+						  <div class="col-sm-6">
+							<div class="form-group">
+							  <select name="service" class="form-control" required>
+								<option value="">Select Service</option>
+								<option value="Haircut">Haircut</option>
+								<option value="Hair Color">Hair Color</option>
+								<option value="Beard Trim">Beard Trim</option>
+								<option value="Manicure">Manicure</option>
+								<option value="Pedicure">Pedicure</option>
+							  </select>
+							</div>
+						  </div>
+						  <div class="col-sm-12">
+							<div class="form-group">
+							  <textarea name="message" class="form-control" placeholder="Message (Optional)"></textarea>
+							</div>
+						  </div>
+						  <div class="col-sm-12">
+							<div class="form-group">
+							  <input type="submit" value="Make an Appointment" class="btn btn-primary">
+							</div>
+						  </div>
+						</div>
+					  </form>
+					  <div id="loadingSpinner" class="spinner" style="display: none;"></div>
+					  
+    			</div>
+    		</div>
+    	</div>
+    </section>
+
+
+    <section id="about" class="ftco-section ftco-team">
+    	<div class="container-fluid px-md-5">
+    		<div class="row justify-content-center pb-3">
+          <div class="col-md-10 heading-section text-center ftco-animate">
+          	<span class="subheading">Artistic Director</span>
+            <h2 class="mb-4">Artist</h2>
+            <p></p>
+          </div>
+        </div>
+        <div class="row">
+        	<div class="col-md-12 ftco-animate">
+        		<div class="carousel-team owl-carousel">
+        			<div class="item">
+		        		<a href="#" class="team text-center">
+		        			<div class="img" style="background-image: url(images/stylist-1.jpg);"></div>
+		        			<h2>BOBBY CHY</h2>
+		        			<span class="position"> Senior Hair Stylist </span>
+		        		</a>
+        			</div>
+        			<div class="item">
+	        			<a href="#" class="team text-center">
+		        			<div class="img" style="background-image: url(images/stylist-2.jpg);"></div>
+		        			<h2>GHALE THE BARBER</h2>
+		        			<span class="position"> Junior Hair Stylist </span>
+		        		</a>
+	        		</div>
+	        		<div class="item">
+	        			<a href="#" class="team text-center">
+		        			<div class="img" style="background-image: url(images/stylist-3.png);"></div>
+		        			<h2>HIMAL NEPALI</h2>
+		        			<span class="position">Junior Hair Stylist</span>
+		        		</a>
+	        		</div>
+	        		<div class="item">
+	        			<a href="#" class="team text-center">
+		        			<div class="img" style="background-image: url(images/stylist-4.jpg);"></div>
+		        			<h2> DILIP MAGAR</h2>
+		        			<span class="position">Junior Hair Stylist</span>
+		        		</a>
+	        		</div>
+	        		
+        		</div>
+        	</div>
+        </div>
+    	</div>
+    </section>
+
+	<section id="gallery" class="ftco-section ftco-no-pt ftco-no-pb">
     	<div class="container">
     		<div class="row no-gutters justify-content-center mb-5 pb-2">
           <div class="col-md-6 text-center heading-section ftco-animate">
@@ -783,11 +897,24 @@
 		// Show loading overlay
 		loadingOverlay.style.display = 'flex';
 		
+		// Get form data
 		const formData = new FormData(form);
 		
+		// Convert FormData to JSON object
+		const data = {};
+		formData.forEach((value, key) => {
+		  data[key] = value;
+		});
+		
+		// Debug log
+		console.log('Sending data:', data);
+
 		fetch('/mail-sender', {
 		  method: 'POST',
-		  body: formData
+		  headers: {
+			'Content-Type': 'application/json'
+		  },
+		  body: JSON.stringify(data)
 		})
 		.then(response => response.json())
 		.then(data => {
@@ -802,8 +929,17 @@
 			// Reset form
 			form.reset();
 		  } else {
-			// Show error alert
-			alert(data.message);
+			// Show detailed error message
+			let errorMessage = data.message;
+			if (data.missing) {
+			  errorMessage += '\nMissing fields:\n';
+			  for (let field in data.missing) {
+				if (data.missing[field]) {
+				  errorMessage += `- ${field}\n`;
+				}
+			  }
+			}
+			alert(errorMessage);
 		  }
 		})
 		.catch(error => {
@@ -828,55 +964,17 @@
 	  });
 	});
 	</script>
-
-  <div id="loadingOverlay" class="loading-overlay" style="display: none;">
-      <div class="spinner"></div>
-      <p>Sending your appointment request...</p>
-  </div>
-
   <div id="successPopup" class="popup" style="display: none;">
-      <div class="popup-content">
-          <h2>Success!</h2>
-          <p id="popupMessage"></p>
-          <button id="closePopup">Close</button>
-      </div>
-  </div>
+    <div class="popup-content">
+        <h2>Success!</h2>
+        <p id="popupMessage"></p>
+        <button id="closePopup">Close</button>
+    </div>
+</div>
 
-  <style>
-      .loading-overlay {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0.7);
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          z-index: 9999;
-      }
-
-      .loading-overlay p {
-          color: white;
-          margin-top: 20px;
-          font-size: 18px;
-      }
-
-      .spinner {
-          border: 6px solid #f3f3f3;
-          border-top: 6px solid #3498db;
-          border-radius: 50%;
-          width: 50px;
-          height: 50px;
-          animation: spin 1s linear infinite;
-      }
-
-      @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-      }
-  </style>
-
+<div id="loadingOverlay" class="loading-overlay" style="display: none;">
+    <div class="spinner"></div>
+    <p>Sending your appointment request...</p>
+</div>
   </body>
 </html>

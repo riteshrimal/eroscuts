@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
+require('dotenv').config(); // Keep only one instance
 
 const app = express();
 
@@ -8,77 +9,96 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// Add this middleware to parse JSON data
+app.use(express.json());
+
+// Set EJS as the view engine and define the views directory
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
-// Serve static files (CSS, JS, HTML)
+
+// Serve static files (CSS, JS, images) from the 'public' directory
 app.use(express.static('public'));
 
-app.get('/', function(req, res, next) {
+// Define route for the home page
+app.get('/', (req, res) => {
     res.render('index');
 });
 
-app.get('/blog', function(req, res, next) {
+// Define route for the blog page
+app.get('/blog', (req, res) => {
     res.render('blog');
 });
 
-// Route to handle form submission
-app.post('/mail-sender', (req, res) => {
-  const { name, email, date, time, service, phone, message } = req.body;
+// Email transporter configuration
+let transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'msg@eroscuts.com', // or your business email
+    pass: process.env.EMAIL_PASS // app password from Gmail
+  },
+  tls: {
+    rejectUnauthorized: false,
+    minVersion: 'TLSv1.2'
+  }
+});
 
-  // Create a transporter using your email credentials
-  let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.EMAIL_USER || 'riteshrimal01@gmail.com',
-      pass: process.env.EMAIL_PASS || 'shbk rucb xwsn zdxe'
+// Test the connection
+transporter.verify(function(error, success) {
+  if (error) {
+    console.log('SMTP connection error:', error);
+  } else {
+    console.log('SMTP server is ready');
+  }
+});
+
+app.post('/mail-sender', async (req, res) => {
+  try {
+    const { name, email, date, time, service, phone, message } = req.body;
+    
+    // Validate required fields
+    if (!name || !email || !date || !time || !service || !phone) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'Please fill in all required fields.' 
+      });
     }
-  });
 
-  // Define the email options
-  let mailOptions = {
-    from: process.env.EMAIL_USER || 'riteshrimal01@gmail.com',
-    to: process.env.BARBER_EMAIL || 'businesriteshrimal@gmail.com',
-    subject: `New Appointment Request from ${name}`,
-    text: `
-      New Appointment Request:
-      
-      Name: ${name}
-      Email: ${email}
-      Phone: ${phone}
-      Date: ${date}
-      Time: ${time}
-      Service: ${service}
-      Message: ${message}
-    `,
-    html: `
-      <h2>New Appointment Request</h2>
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Phone:</strong> ${phone}</p>
-      <p><strong>Date:</strong> ${date}</p>
-      <p><strong>Time:</strong> ${time}</p>
-      <p><strong>Service:</strong> ${service}</p>
-      <p><strong>Message:</strong> ${message}</p>
-    `
-  };
+    const mailOptions = {
+      from: {
+        name: 'Eros Cuts',
+        address: 'msg@eroscuts.com' // your business email
+      },
+      to: process.env.BARBER_EMAIL,
+      replyTo: email, // replies will go to the customer
+      subject: `New Appointment Request from ${name}`,
+      html: `
+        <h2>New Appointment Request</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Date:</strong> ${date}</p>
+        <p><strong>Time:</strong> ${time}</p>
+        <p><strong>Service:</strong> ${service}</p>
+        <p><strong>Message:</strong> ${message || 'No message provided'}</p>
+      `
+    };
 
-  // Send the email
-  setTimeout(() => {
-    transporter.sendMail(mailOptions, (err, info) => {
-      if (err) {
-        console.error('Error sending email:', err);
-        res.status(500).json({ success: false, message: 'Error sending appointment request. Please try again.' });
-      } else {
-        console.log('Email sent successfully:', info.response);
-        res.status(200).json({ 
-          success: true, 
-          message: 'Appointment request sent successfully. We will contact you soon.'
-        });
-      }
+    await transporter.sendMail(mailOptions);
+    
+    res.status(200).json({ 
+      success: true, 
+      message: 'Appointment request sent successfully. We will contact you soon.' 
     });
-  }, 2000); // 2 second delay
-});;
-// Start the server
+
+  } catch (error) {
+    console.error('Error sending email:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Failed to send appointment request. Please try again.' 
+    });
+  }
+});
+// Start the server on the specified port
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
